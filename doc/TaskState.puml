@@ -1,19 +1,22 @@
 @startuml
 'scale 350 width
-[*] --> uploading: 确认创建对账任务
+Init --> uploading: 确认创建对账任务
+Init: + create()
 uploading ---> comparing: 开始对账
-uploading: + saveFile()
+uploading: + compareBill()
+uploading: + saveFileFail()
 
 uploading -> uploadFail: 异常
 uploadFail -> uploading: 更新账单
-uploadFail: + cleanFile()
+uploadFail: + update()
 compareFail -> uploading: 更新账单
-compareFail: + ???
+compareFail: + update()
 comparing --> compareSuccess: 对账成完成
-comparing: + compareBill()
+comparing: + complete()
+comparing: + compareFail()
 comparing -> compareFail: 对账异常
 compareSuccess -> uploading: 更新账单
-compareSuccess: + summarize()
+compareSuccess: + update()
 compareSuccess -> compareFail: 存在失败对账单
 compareSuccess --> processSuccess: 不存在差异
 processSuccess -> confirmSuccess: 确认结果
