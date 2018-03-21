@@ -1,6 +1,7 @@
 package com.example.springbootdemo.state;
 
 import com.example.springbootdemo.CompareTask;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 对账任务状态
@@ -8,23 +9,15 @@ import com.example.springbootdemo.CompareTask;
  * @author hurry
  * @date 2018/3/20
  **/
+@Slf4j
 public abstract class AbstractTaskState {
     /**
-     * 创建任务
+     * 解析账单
      *
      * @param task
      */
-    public void create(CompareTask task) {
-
-    }
-
-    /**
-     * 更新文件
-     *
-     * @param task
-     */
-    public void update(CompareTask task) {
-
+    public void resolveBill(CompareTask task) {
+        log.error("不允许解析账单操作。state = [{}]", task.getState().getClass().getSimpleName());
     }
 
     /**
@@ -33,7 +26,7 @@ public abstract class AbstractTaskState {
      * @param task
      */
     public void complete(CompareTask task) {
-
+        log.error("不允许完成对账操作。state = [{}]", task.getState().getClass().getSimpleName());
     }
 
     /**
@@ -42,7 +35,7 @@ public abstract class AbstractTaskState {
      * @param task
      */
     public void compareFail(CompareTask task) {
-
+        log.error("不允许对账异常操作。state = [{}]", task.getState().getClass().getSimpleName());
     }
 
     /**
@@ -51,7 +44,7 @@ public abstract class AbstractTaskState {
      * @param task
      */
     public void saveFileFail(CompareTask task) {
-
+        log.error("不允许解析文件失败操作。state = [{}]", task.getState().getClass().getSimpleName());
     }
 
     /**
@@ -60,6 +53,6 @@ public abstract class AbstractTaskState {
      * @param task
      */
     public void compareBill(CompareTask task) {
-
+        log.error("不允许开始对账操作。state = [{}]", task.getState().getClass().getSimpleName());
     }
 }

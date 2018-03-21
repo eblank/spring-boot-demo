@@ -4,35 +4,42 @@ import com.example.springbootdemo.state.AbstractTaskState;
 import com.example.springbootdemo.state.InitTaskState;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author hurry
  * @date 2018/3/20
  **/
 @Slf4j
 public class CompareTask {
-    public final AbstractTaskState uploading = new InitTaskState();
+    private AbstractTaskState state;
 
-    private AbstractTaskState state = new InitTaskState();
+    public CompareTask(AbstractTaskState state) {
+        this.state = state;
+    }
 
-    /**
-     * 创建任务
-     */
-    public void create() {
-        state.create(this);
+    public static void main(String[] args) throws InterruptedException {
+        CompareTask task = new CompareTask(new InitTaskState());
+        task.resolveBill();
+        task.completeCompare();
+        task.update();
+        task.compareFail();
+        TimeUnit.SECONDS.sleep(5);
+        task.update();
+        TimeUnit.SECONDS.sleep(5);
     }
 
     /**
-     * 异常
-     * 上传异常， 对账异常
+     * 解析账单
      */
-    public void fail() {
-        state.saveFileFail(this);
+    public void resolveBill() {
+        state.resolveBill(this);
     }
 
     /**
-     * 开始对账
+     * 完成解析账单
      */
-    public void start() {
+    public void completeResolveBill() {
         state.compareBill(this);
     }
 
@@ -40,25 +47,38 @@ public class CompareTask {
      * 更新任务， 更新账单
      */
     public void update() {
-        state.update(this);
+        state.resolveBill(this);
     }
 
     /**
-     * 对账成功
+     * 完成对账
      */
-    public void compareSuccess() {
+    public void completeCompare() {
         state.complete(this);
+    }
+
+    /**
+     * 上传异常
+     */
+    public void resolveBillFail() {
+        //todo 一个状态有两个触发事件在并发下的异常
+        state.saveFileFail(this);
     }
 
     /**
      * 对账失败
      */
     public void compareFail() {
+        //todo 一个状态有两个触发事件在并发下的异常
         state.compareFail(this);
     }
 
     public void change(AbstractTaskState state) {
+        log.debug("change state {} -> {}", this.state.getClass().getSimpleName(), state.getClass().getSimpleName());
         this.state = state;
-        log.debug("change state {} -> {}", state, this.state);
+    }
+
+    public AbstractTaskState getState() {
+        return state;
     }
 }

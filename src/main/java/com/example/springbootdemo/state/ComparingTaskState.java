@@ -14,7 +14,6 @@ public class ComparingTaskState extends AbstractTaskState {
 
     @Override
     public void compareFail(CompareTask task) {
-        super.compareFail(task);
         task.change(new CompareFailTaskState());
     }
 }
