@@ -1,0 +1,36 @@
+#自定义
+name: ${random.int}
+
+#常用属性
+debug: false
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+    path: /api
+
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/eblank?useSSL=false
+      username: root
+      password: root
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      validationQuery: select 'x'
+      validation-query-timeout: 30
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+
+mybatis:
+    type-aliases-package: com.example.springbootdemo.domain
+    config-location: classpath:mybatis/mybatis-config.xml
+    mapper-locations: classpath:mybatis/mapper/*.xml
