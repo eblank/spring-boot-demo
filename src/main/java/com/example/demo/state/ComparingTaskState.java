@@ -1,6 +1,6 @@
-package com.example.springbootdemo.state;
+package com.example.demo.state;
 
-import com.example.springbootdemo.CompareTask;
+import com.example.demo.CompareTask;
 
 /**
  * @author hurry

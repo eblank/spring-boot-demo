@@ -1,6 +1,6 @@
-package com.example.springbootdemo.state;
+package com.example.demo.state;
 
-import com.example.springbootdemo.CompareTask;
+import com.example.demo.CompareTask;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
@@ -8,13 +8,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 上传失败
- *
  * @author hurry
  * @date 2018/3/20
  **/
 @Slf4j
-public class UploadFailTaskState extends AbstractTaskState {
+public class CompareSuccessTaskState extends AbstractTaskState {
     @Override
     public void resolveBill(CompareTask task) {
         task.change(new UploadingTaskState());

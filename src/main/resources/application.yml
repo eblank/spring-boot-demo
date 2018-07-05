@@ -6,13 +6,12 @@ debug: false
 server:
   port: 8080
   servlet:
-    context-path: /demo
-    path: /api
-
+    context-path: /
 
 spring:
   datasource:
     druid:
+      driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://localhost:3306/eblank?useSSL=false
       username: root
       password: root
@@ -31,6 +30,12 @@ spring:
       min-evictable-idle-time-millis: 300000
 
 mybatis:
-    type-aliases-package: com.example.springbootdemo.domain
+    type-aliases-package: com.example.demo.domain
     config-location: classpath:mybatis/mybatis-config.xml
     mapper-locations: classpath:mybatis/mapper/*.xml
+
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  notEmpty: true
+

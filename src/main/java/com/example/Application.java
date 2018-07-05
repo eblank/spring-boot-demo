@@ -1,4 +1,4 @@
-package com.example.springbootdemo;
+package com.example;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author hurry
  */
 @SpringBootApplication
-@MapperScan("com.example.springbootdemo.mapper")
-public class SpringBootDemoApplication {
+@MapperScan("com.example.demo.mapper")
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootDemoApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

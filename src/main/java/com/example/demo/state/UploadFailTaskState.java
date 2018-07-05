@@ -1,6 +1,6 @@
-package com.example.springbootdemo.state;
+package com.example.demo.state;
 
-import com.example.springbootdemo.CompareTask;
+import com.example.demo.CompareTask;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
@@ -8,36 +8,33 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 上传失败
+ *
  * @author hurry
  * @date 2018/3/20
  **/
 @Slf4j
-public class UploadingTaskState extends AbstractTaskState {
+public class UploadFailTaskState extends AbstractTaskState {
     @Override
-    public void compareBill(CompareTask task) {
-        task.change(new ComparingTaskState());
+    public void resolveBill(CompareTask task) {
+        task.change(new UploadingTaskState());
         CompletableFuture.runAsync(() -> {
-            log.debug("------------对账中--------------");
+            log.debug("--------------正在解析文件------------");
             try {
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             if (!new Random().nextBoolean()) {
-                throw new RuntimeException("对账过程出现异常");
+                throw new RuntimeException("文件格式错误");
             }
         }).whenComplete((aVoid, throwable) -> {
             if (throwable != null) {
                 log.error(throwable.getMessage(), throwable.getCause());
-                task.compareFail();
+                task.resolveBillFail();
             } else {
-                task.completeCompare();
+                task.completeResolveBill();
             }
         });
-    }
-
-    @Override
-    public void saveFileFail(CompareTask task) {
-        task.change(new UploadFailTaskState());
     }
 }

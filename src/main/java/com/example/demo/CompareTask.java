@@ -1,7 +1,7 @@
-package com.example.springbootdemo;
+package com.example.demo;
 
-import com.example.springbootdemo.state.AbstractTaskState;
-import com.example.springbootdemo.state.InitTaskState;
+import com.example.demo.state.AbstractTaskState;
+import com.example.demo.state.InitTaskState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
