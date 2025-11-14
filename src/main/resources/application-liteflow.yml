@@ -1,0 +1,8 @@
+liteflow:
+  rule-source: config/flow.xml
+  thread-executor:
+    core-pool-size: 6
+    max-pool-size: 12
+    keep-alive-time: 60s
+    queue-capacity: 200
+  enable: true
