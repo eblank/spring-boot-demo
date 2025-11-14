@@ -1,4 +1,4 @@
-package com.example.demo.liteflow.component;
+package com.example.demo.component;
 
 import com.yomahub.liteflow.annotation.LiteflowComponent;
 import com.yomahub.liteflow.core.NodeSwitchComponent;

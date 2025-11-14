@@ -1,4 +1,4 @@
-package com.example.demo.liteflow.service;
+package com.example.demo.service;
 
 import com.yomahub.liteflow.core.FlowExecutor;
 import com.yomahub.liteflow.flow.LiteflowResponse;
